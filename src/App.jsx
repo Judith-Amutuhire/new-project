@@ -9,23 +9,6 @@ import Video from "./components/Video";
 import { useState, useRef } from "react";
 
 function App() {
-  const [activeSection, setActiveSection] = useState("highlighted");
-
-  // Refs for scrollable sections
-  const highlightedRef = useRef(null);
-  const snowTreksRef = useRef(null);
-  const summerEventsRef = useRef(null);
-  const epicAdventureRef = useRef(null);
-  const specialEventsRef = useRef(null);
-  const youTubeVideosRef = useRef(null);
-
-  const scroll = (ref, direction) => {
-    if (ref.current) {
-      const scrollAmount = direction === "left" ? -300 : 300;
-      ref.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
-
   const highlightedEvents = [
     { id: 1, image: images.kilimanjaro, title: "Kilimanjaro" },
     { id: 2, image: images.madagascar, title: "Madagascar" },
