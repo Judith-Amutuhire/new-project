@@ -7,27 +7,9 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Card2 } from "./components/Card2";
 import Video from "./components/Video";
-import { useState, useRef } from "react";
 
 function App() {
-  const [activeSection, setActiveSection] = useState("highlighted");
-
-  // Refs for scrollable sections
-  const highlightedRef = useRef(null);
-  const snowTreksRef = useRef(null);
-  const summerEventsRef = useRef(null);
-  const epicAdventureRef = useRef(null);
-  const specialEventsRef = useRef(null);
-  const youTubeVideosRef = useRef(null);
-
-  const scroll = (ref, direction) => {
-    if (ref.current) {
-      const scrollAmount = direction === "left" ? -300 : 300;
-      ref.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
-
-  const highlightedEvents = [
+  const [highlightedEvents, setHighlightedEvents] = useState([
     { id: 1, image: images.kilimanjaro, title: "Kilimanjaro" },
     { id: 2, image: images.madagascar, title: "Madagascar" },
     { id: 3, image: images.capeTown, title: "Cape Town" },
@@ -138,400 +120,135 @@ function App() {
   ]);
 
   return (
-    <>
-      <div className="bg-white">
-        <Header />
-        <Section1 />
+    <div className="bg-white">
+      <Header />
+      <Section1 />
 
-        {/* Highlighted Events */}
-        <div className="p-4 md:p-8">
-          <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 text-brownish">
-            Highlighted Events
-          </p>
-          <p className="mb-4 md:mb-8 text-darkBrown">
-            Recommended camps by our instructors
-          </p>
-          <div className="relative">
-            <div
-              ref={highlightedRef}
-              className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth"
-            >
-              {highlightedEvents.map((event) => (
-                <div key={event.id} className="flex-none w-64 md:w-80">
-                  <Card1 image={event.image} title={event.title} />
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => scroll(highlightedRef, "left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
+      {/* Highlighted Events */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4">
+          Highlighted Events
+        </p>
+        <div className="flex overflow-x-auto space-x-4 p-2 scroll-smooth">
+          {highlightedEvents.map((event) => (
+            <Card1 key={event.id} image={event.image} title={event.title} />
+          ))}
+        </div>
+      </div>
+
+      {/* Snow Treks */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Snow Treks</p>
+        <div className="flex overflow-x-auto space-x-4 p-2 scroll-smooth">
+          {snowTreks.map((event) => (
+            <Card2
+              key={event.id}
+              image={event.image}
+              title={event.title}
+              location={event.location}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Summer Events */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Summer Events
+        </p>
+        <p className="mb-4 md:mb-8 bg-darkBrown">
+          Join our exciting range of summer activities
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {summerEvents.map((event) => (
+              <div key={event.id} className="flex-none w-64 md:w-72">
+                <Card2
+                  image={event.image}
+                  title={event.title}
+                  location={event.location}
                 />
-              </svg>
-            </button>
-            <button
-              onClick={() => scroll(highlightedRef, "right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Snow Treks */}
-        <div className="p-4 md:p-8">
-          <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 text-brownish">
-            Snow Treks
-          </p>
-          <p className="mb-4 md:mb-8 text-darkBrown">
-            Experience the magic of winter landscapes with our guided snow treks
-          </p>
-          <div className="relative">
-            <div
-              ref={snowTreksRef}
-              className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth"
-            >
-              {snowTreks.map((event) => (
-                <div key={event.id} className="flex-none w-64 md:w-72">
-                  <Card2
-                    image={event.image}
-                    title={event.title}
-                    location={event.location}
-                  />
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => scroll(snowTreksRef, "left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
+      </div>
+      {/* Epic Adventures */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Epic Adventure
+        </p>
+        <p className="mb-4 md:mb-8 bg-darkBrown">
+          Push your limits with our most thrilling outdoor challenges.
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {epicAdventure.map((event) => (
+              <div key={event.id} className="flex-none w-64 md:w-72">
+                <Card2
+                  image={event.image}
+                  title={event.title}
+                  location={event.location}
                 />
-              </svg>
-            </button>
-            <button
-              onClick={() => scroll(snowTreksRef, "right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Summer Events */}
-        <div className="p-4 md:p-8">
-          <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 text-brownish">
-            Summer Events
-          </p>
-          <p className="mb-4 md:mb-8 text-darkBrown">
-            Join our exciting range of summer activities
-          </p>
-          <div className="relative">
-            <div
-              ref={summerEventsRef}
-              className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth"
-            >
-              {summerEvents.map((event) => (
-                <div key={event.id} className="flex-none w-64 md:w-72">
-                  <Card2
-                    image={event.image}
-                    title={event.title}
-                    location={event.location}
-                  />
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => scroll(summerEventsRef, "left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
+      </div>
+      {/* Special Events */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Special Events
+        </p>
+        <p className="mb-4 md:mb-8 bg-darkBrown">
+          Join us for unique, limited-time gatherings that celebrate remarkable
+          occasions
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {specialEvents.map((event) => (
+              <div key={event.id} className="flex-none w-64 md:w-72">
+                <Card2
+                  image={event.image}
+                  title={event.title}
+                  location={event.location}
                 />
-              </svg>
-            </button>
-            <button
-              onClick={() => scroll(summerEventsRef, "right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Epic Adventures */}
-        <div className="p-4 md:p-8">
-          <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 text-brownish">
-            Epic Adventure
-          </p>
-          <p className="mb-4 md:mb-8 text-gray-600">
-            Push your limits with our most thrilling outdoor challenges.
-          </p>
-          <div className="relative">
-            <div
-              ref={epicAdventureRef}
-              className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth"
-            >
-              {epicAdventure.map((event) => (
-                <div key={event.id} className="flex-none w-64 md:w-72">
-                  <Card2
-                    image={event.image}
-                    title={event.title}
-                    location={event.location}
-                  />
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => scroll(epicAdventureRef, "left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
+      </div>
+      {/* YouTube Videos */}
+      <div className="p-4 md:p-8 bg-red-100">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Experience Yourself
+        </p>
+        <p className="mb-4 md:mb-8 text-black">
+          Exclusive footage from our camps
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {youTubeVideos.map((video) => (
+              <div key={video.id} className="flex-none w-64 md:w-72">
+                <Video
+                  image={video.image}
+                  link={video.link}
+                  altText={video.title || "YouTube video thumbnail"}
+                  className="w-full h-full"
                 />
-              </svg>
-            </button>
-            <button
-              onClick={() => scroll(epicAdventureRef, "right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Special Events */}
-        <div className="p-4 md:p-8">
-          <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 text-brownish">
-            Special Events
-          </p>
-          <p className="mb-4 md:mb-8 text-darkBrown">
-            Join us for unique, limited-time gatherings that celebrate
-            remarkable occasions
-          </p>
-          <div className="relative">
-            <div
-              ref={specialEventsRef}
-              className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth"
-            >
-              {specialEvents.map((event) => (
-                <div key={event.id} className="flex-none w-64 md:w-72">
-                  <Card2
-                    image={event.image}
-                    title={event.title}
-                    location={event.location}
-                  />
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => scroll(specialEventsRef, "left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={() => scroll(specialEventsRef, "right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* YouTube Videos */}
-        <div className="p-4 md:p-8 bg-red-100">
-          <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 text-brownish">
-            Experience Yourself
-          </p>
-          <p className="mb-4 md:mb-8 text-black">
-            Exclusive footage from our camps
-          </p>
-          <div className="relative">
-            <div
-              ref={youTubeVideosRef}
-              className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth"
-            >
-              {youTubeVideos.map((video) => (
-                <div key={video.id} className="flex-none w-64 md:w-72">
-                  <Video
-                    image={video.image}
-                    link={video.link}
-                    altText={video.title || "YouTube video thumbnail"}
-                    className="w-full h-full"
-                  />
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => scroll(youTubeVideosRef, "left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={() => scroll(youTubeVideosRef, "right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hover:bg-opacity-100 z-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-        {/* Testimonials */}
-        <div className="p-4 md:p-8">
-          <p className="text-xl md:text-2xl font-semibold mb-2 md:mb-4 text-brownish">
-            Why people <span className="text-red-500">❤️</span> Invincible
-          </p>
-          <p className="text-base md:text-lg mb-4 md:mb-8 text-black">
-            Experience the best with us
-          </p>
+      </div>
+      {/* Testimonials */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-semibold mb-2 md:mb-4 bg-brownish">
+          Why people <span className="text-red-500">❤️</span> Invincible
+        </p>
+        <p className="text-base md:text-lg mb-4 md:mb-8 text-black">
+          Experience the best with us
+        </p>
 
         <div className="flex flex-col md:flex-row gap-4">
           {/* Testimonial Cards */}
