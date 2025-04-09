@@ -124,6 +124,37 @@ function App() {
           {highlightedEvents.map((event) => (
             <Card1 key={event.id} image={event.image} title={event.title} />
           ))}
+<<<<<<< HEAD
+        </div>
+      </div>
+
+      {/* Snow Treks */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Snow Treks</p>
+        <div className="flex overflow-x-auto space-x-4 p-2 scroll-smooth">
+          {snowTreks.map((event) => (
+            <Card2
+              key={event.id}
+              image={event.image}
+              title={event.title}
+              location={event.location}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Summer Events */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Summer Events
+        </p>
+        <p className="mb-4 md:mb-8 bg-darkBrown">
+          Join our exciting range of summer activities
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {summerEvents.map((event) => (
+=======
         </div>
       </div>
 
@@ -160,6 +191,101 @@ function App() {
                   location={event.location}
                 />
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Epic Adventures */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Epic Adventure
+        </p>
+        <p className="mb-4 md:mb-8 bg-darkBrown">
+          Push your limits with our most thrilling outdoor challenges.
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {epicAdventure.map((event) => (
+              <div key={event.id} className="flex-none w-64 md:w-72">
+                <Card2
+                  image={event.image}
+                  title={event.title}
+                  location={event.location}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Special Events */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Special Events
+        </p>
+        <p className="mb-4 md:mb-8 bg-darkBrown">
+          Join us for unique, limited-time gatherings that celebrate remarkable
+          occasions
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {specialEvents.map((event) => (
+>>>>>>> b1e193ef3be863b756bffbe9b360706c3b68956e
+              <div key={event.id} className="flex-none w-64 md:w-72">
+                <Card2
+                  image={event.image}
+                  title={event.title}
+                  location={event.location}
+                />
+              </div>
+<<<<<<< HEAD
+=======
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* YouTube Videos */}
+      <div className="p-4 md:p-8 bg-red-100">
+        <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4 bg-brownish">
+          Experience Yourself
+        </p>
+        <p className="mb-4 md:mb-8 text-black">
+          Exclusive footage from our camps
+        </p>
+        <div className="relative">
+          <div className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-8 p-2 scroll-smooth">
+            {youTubeVideos.map((video) => (
+              <div key={video.id} className="flex-none w-64 md:w-72">
+                <Video
+                  image={video.image}
+                  link={video.link}
+                  altText={video.title || "YouTube video thumbnail"}
+                  className="w-full h-full"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Testimonials */}
+      <div className="p-4 md:p-8">
+        <p className="text-xl md:text-2xl font-semibold mb-2 md:mb-4 bg-brownish">
+          Why people <span className="text-red-500">❤️</span> Invincible
+        </p>
+        <p className="text-base md:text-lg mb-4 md:mb-8 text-black">
+          Experience the best with us
+        </p>
+
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Testimonial Cards */}
+          <div className="flex flex-col gap-4 w-full md:w-1/2">
+            {testimonials.map((testimonial) => (
+              <Testimonial
+                key={testimonial.id}
+                name={testimonial.name}
+                role={testimonial.role}
+                image={testimonial.image}
+              />
+>>>>>>> b1e193ef3be863b756bffbe9b360706c3b68956e
             ))}
           </div>
         </div>
